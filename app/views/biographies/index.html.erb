@@ -1,6 +1,14 @@
 <h2>Biographies</h2>
-<%= @names.each do |name| %>
-  <p>
-  <%= name %>
-  </p>
-<% end %>
+<div>
+  Next Page of Biographies:
+  <a href="<%= @next_pages %>"><%= @next_pages %></a>
+</div>
+
+<h2>Names on this page</h2>
+<div>
+  <%= @names.each do |name| %>
+    <p>
+      <%= name %>
+    </p>
+  <% end %>
+</div>
