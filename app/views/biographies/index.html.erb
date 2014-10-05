@@ -1,8 +1,17 @@
+<div>
+<%= @page_array.each do |page| %>
+  <p>
+  <a href="<%= page %>"><%= page %></a>
+  </p>
+<% end %>
+</div>
+
 <h2>Biographies</h2>
 <div>
   Next Page of Biographies:
   <a href="<%= @next_pages %>"><%= @next_pages %></a>
 </div>
+<%= @num_pages %>
 
 <h2>Names on this page</h2>
 <div>
