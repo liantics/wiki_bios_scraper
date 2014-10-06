@@ -6,6 +6,7 @@ class BiographiesController < ApplicationController
     start_page = "http://en.wikipedia.org/wiki/Category:FA-Class_biography_articles"
 
     @page_array = Array.new
+    @page_array << start_page
     @bio_pages = Array.new
 
     traverse_pages(start_page)
@@ -38,7 +39,7 @@ class BiographiesController < ApplicationController
   def generate_next_url(traversal_doc)
     url = traversal_doc.xpath("//div[@id='mw-pages']/a[contains(@href,'pagefrom')]/@href")
     if ! url.empty?
-      return url.first.value
+      url.first.value
     end
   end
 

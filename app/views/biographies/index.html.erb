@@ -1,5 +1,5 @@
 <div>
-<%= @page_array.each do |page| %>
+<% @page_array.each do |page| %>
   <p>
   <a href="<%= page %>"><%= page %></a>
   </p>
@@ -10,7 +10,7 @@
 
 <h2>Names</h2>
 <div>
-  <%= @names.each do |name| %>
+  <% @names.each do |name| %>
     <p>
       <%= name %>
     </p>
