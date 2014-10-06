@@ -3,45 +3,58 @@ class BiographiesController < ApplicationController
   require 'open-uri'
 
   def index
-    name_list = Array.new
-    doc = Nokogiri::HTML(open("http://en.wikipedia.org/wiki/Category:FA-Class_biography_articles"))
+    start_page = "http://en.wikipedia.org/wiki/Category:FA-Class_biography_articles"
 
-    @pages = doc.xpath("//a[contains(@href,'/wiki/Talk:')]/text()")
-    @names = generate_names(@pages)
-    @all_category_qualities = doc.xpath("//a[contains(@title,'Category:')]")
+    @page_array = Array.new
+    @page_array << start_page
+    @bio_pages = Array.new
 
-    next_url = doc.at_xpath("//a[contains(@href,'pagefrom')]/@href")
-    @next_page = "http://en.wikipedia.org#{next_url}"
+    traverse_pages(start_page)
 
-    @num_pages = 5
-    @iterations = 1
-    @page_array = Array.new()
-    @page_array << @next_page
-    traverse_pages(@next_page, @num_pages, @iterations)
-    11.times do
-      @page_array.pop
-    end
-
-    #@num_pages_text = doc.at_xpath("//a[contains(@href,'pagefrom')]/text()")
-    #@old_num_pages = generate_num_pages(@num_pages_text)
+    @names = generate_names(@bio_pages)
   end
 
   def show
   end
 
-  def traverse_pages(start_page, num_pages, iterations)
+  def traverse_pages(start_page)
+    traversal_doc = Nokogiri::HTML(open(start_page))
+    bio_page_list = generate_bio_pages(traversal_doc)
+    generate_page_list(traversal_doc, bio_page_list)
+    next_url = generate_next_url(traversal_doc)
 
-    while iterations < num_pages
-      traversal_doc = Nokogiri::HTML(open(start_page))
-
-      next_url = traversal_doc.at_xpath("//a[contains(@href,'pagefrom')]/@href")
-      traversal_next_page = "http://en.wikipedia.org/#{next_url}"
-
-      @page_array << traversal_next_page
-
-      iterations += 1
-      traverse_pages(traversal_next_page, num_pages, iterations)
+    if next_url
+      if next_url.include? "pagefrom"
+        traversal_next_page = "http://en.wikipedia.org/#{next_url}"
+        @page_array << traversal_next_page
+        traverse_pages(traversal_next_page)
+      end
     end
+  end
+
+  def generate_bio_pages(traversal_doc)
+    traversal_doc.xpath("//a[contains(@href,'/wiki/Talk:')]/text()")
+  end
+
+  def generate_next_url(traversal_doc)
+    url = traversal_doc.xpath("//div[@id='mw-pages']/a[contains(@href,'pagefrom')]/@href")
+    if ! url.empty?
+      url.first.value
+    end
+  end
+
+  def generate_page_list(traversal_doc, bio_pages)
+    traversal_doc.xpath("//a[contains(@href,'/wiki/Talk:')]/text()")
+
+    bio_pages.each do |page|
+      @bio_pages << page.text
+    end
+  end
+
+  def start_page_list
+    start_page = Array.new
+    start_pages = ["http://en.wikipedia.org/w/index.php?title=Category:FA-Class_biography_articles", "http://en.wikipedia.org/wiki/Category:A-Class_biography_articles", "http://en.wikipedia.org/wiki/Category:GA-Class_biography_articles", "http://en.wikipedia.org/wiki/Category:B-Class_biography_articles", "http://en.wikipedia.org/wiki/Category:C-Class_biography_articles"]
+    return start_pages
   end
 
   private
@@ -50,14 +63,10 @@ class BiographiesController < ApplicationController
     cleaned_names = Array.new
 
     name_list.each do |name|
-      stripped_name = name.text.gsub("Talk:","")
+      stripped_name = name.gsub("Talk:","")
       cleaned_names << stripped_name
     end
 
     cleaned_names
-  end
-
-  def generate_num_pages(page_count)
-    page_count.text.gsub("next ","").to_i
   end
 end
