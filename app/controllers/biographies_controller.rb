@@ -3,7 +3,7 @@ class BiographiesController < ApplicationController
   require 'open-uri'
 
   def index
-    start_page = "http://en.wikipedia.org/wiki/Category:B-Class_biography_articles"
+    start_page = "http://en.wikipedia.org/wiki/Category:FA-Class_biography_articles"
 
     @page_array = Array.new
     @bio_pages = Array.new
@@ -22,9 +22,9 @@ class BiographiesController < ApplicationController
     generate_page_list(traversal_doc, bio_page_list)
     next_url = generate_next_url(traversal_doc)
 
-    if ! next_url.empty?
-      if next_url.first.value.include? "pagefrom"
-        traversal_next_page = "http://en.wikipedia.org/#{next_url.first.value}"
+    if next_url
+      if next_url.include? "pagefrom"
+        traversal_next_page = "http://en.wikipedia.org/#{next_url}"
         @page_array << traversal_next_page
         traverse_pages(traversal_next_page)
       end
@@ -36,14 +36,17 @@ class BiographiesController < ApplicationController
   end
 
   def generate_next_url(traversal_doc)
-    traversal_doc.xpath("//div[@id='mw-pages']/a[contains(@href,'pagefrom')]/@href")
+    url = traversal_doc.xpath("//div[@id='mw-pages']/a[contains(@href,'pagefrom')]/@href")
+    if ! url.empty?
+      return url.first.value
+    end
   end
 
   def generate_page_list(traversal_doc, bio_pages)
     traversal_doc.xpath("//a[contains(@href,'/wiki/Talk:')]/text()")
 
     bio_pages.each do |page|
-      @bio_pages << page
+      @bio_pages << page.text
     end
   end
 
@@ -59,7 +62,7 @@ class BiographiesController < ApplicationController
     cleaned_names = Array.new
 
     name_list.each do |name|
-      stripped_name = name.text.gsub("Talk:","")
+      stripped_name = name.gsub("Talk:","")
       cleaned_names << stripped_name
     end
 
