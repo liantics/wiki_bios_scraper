@@ -1,18 +1,18 @@
+<h2>Pages in This Quality Class</h2>
 <div>
 <% @pages_in_this_quality_class.each do |page| %>
   <p>
-  <a href="<%= page %>"><%= page %></a>
+    <a href="<%= page %>"><%= page %></a>
   </p>
 <% end %>
 </div>
 
-<h2>Biographies</h2>
-
-<h2>Names</h2>
+<h2>Names on Those Pages</h2>
 <div>
   <% @names.each do |name| %>
     <p>
       <%= name %>
     </p>
   <% end %>
+
 </div>

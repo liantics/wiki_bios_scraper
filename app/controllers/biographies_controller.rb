@@ -16,7 +16,7 @@ class BiographiesController < ApplicationController
 
     PageWalker.new.generate_biography_page_list(START_PAGES.second, @biography_pages, @pages_in_this_quality_class)
 
-    @names = generate_names(@biography_pages)
+    @names = generate_names(@biography_pages.flatten)
   end
 
   def show

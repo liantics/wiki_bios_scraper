@@ -34,8 +34,6 @@ class PageWalker
   end
 
   def generate_biographies_list(traversal_doc, biography_page_list)
-    biography_page_list.each do |page|
-      @biography_pages << page.text
-    end
+    @biography_pages << biography_page_list.map { |page| page.text }
   end
 end
