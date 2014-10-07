@@ -2,7 +2,7 @@
 <div>
 <% @pages_in_this_quality_class.each do |page| %>
   <p>
-    <a href="<%= page %>"><%= page %></a>
+    <%= link_to page, page %>
   </p>
 <% end %>
 </div>
