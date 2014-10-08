@@ -8,3 +8,4 @@ gem "jquery-rails"
 gem "jbuilder", "~> 2.0"
 gem "nokogiri"
 gem "rails_12factor"
+gem 'sexmachine', '~> 0.1.0'

@@ -1,0 +1,12 @@
+<h2><%= @person.name %></h2>
+<h3>Gender</h3>
+<p>
+Rough estimate: <%= @person.rough_gender %>
+</p>
+<p>
+Verified: <%= @person.verified_gender %>
+</p>
+
+<h3>Wikipedia Page</h3>
+<%= link_to @person.url, @person.url %>
+
