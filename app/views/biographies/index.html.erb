@@ -8,11 +8,17 @@
 </div>
 
 <h2>Names on Those Pages</h2>
-<div>
+<div style="float: left;">
   <% @names.each do |name| %>
     <p>
-      <%= name %>
+    <%= name %>
     </p>
   <% end %>
-
+</div>
+<div style="float: right">
+  <% @urls.each do |url| %>
+    <p>
+    <%= link_to url, url %>
+    </p>
+  <% end %>
 </div>

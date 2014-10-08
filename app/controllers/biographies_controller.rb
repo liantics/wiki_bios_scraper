@@ -21,14 +21,32 @@ class BiographiesController < ApplicationController
     )
 
     @names = generate_names(@biography_pages.flatten)
+    @urls = generate_urls(@names)
   end
 
   def show
+    def show
+      @person = Biography.find(params[:id])
+    end
   end
 
   private
 
   def generate_names(name_list)
-      name_list.map { |name| name.gsub("Talk:", "") }
+    name_list.map { |name| name.gsub("Talk:", "") }
+  end
+
+  def generate_urls(name_list)
+    name_list.map { |name| "http://en.wikipedia.org/wiki/#{name}"}
+  end
+
+  def fill_database
+    i = 0
+    @names.each do
+      this_name = @names[i]
+      this_url = @urls[i]
+      Biography.new.generate_entries(this_name, this_url)
+      i+=1
+    end
   end
 end

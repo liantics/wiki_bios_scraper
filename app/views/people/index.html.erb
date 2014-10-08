@@ -1,0 +1,7 @@
+<h2>People</h2>
+<% @people.each do |person| %>
+  <p>
+  <%= link_to person.name, person %><br />
+  gender:<%= person.rough_gender %>
+  </p>
+<% end %>
