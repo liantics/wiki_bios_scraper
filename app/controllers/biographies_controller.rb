@@ -11,23 +11,23 @@ class BiographiesController < ApplicationController
   ]
 
   def index
-    @pages_in_this_quality_class = [START_PAGES.second]
+    @pages_in_this_quality_class = [START_PAGES.fourth]
     @biography_pages = []
 
     PageWalker.new.generate_biography_page_list(
-      START_PAGES.second,
+      START_PAGES.fourth,
       @biography_pages,
       @pages_in_this_quality_class
     )
 
     @names = generate_names(@biography_pages.flatten)
     @urls = generate_urls(@names)
+
+    fill_database
   end
 
   def show
-    def show
       @person = Biography.find(params[:id])
-    end
   end
 
   private
@@ -42,7 +42,7 @@ class BiographiesController < ApplicationController
 
   def fill_database
     i = 0
-    @names.each do
+    @names.each do |name|
       this_name = @names[i]
       this_url = @urls[i]
       Biography.new.generate_entries(this_name, this_url)
