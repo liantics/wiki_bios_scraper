@@ -77,13 +77,9 @@ class BiographyStatistic < ActiveRecord::Base
 
     percentages_to_generate.each do |percentage|
       count_1 = percentage.first.to_sym
-      puts count_1
       count_2 = percentage.second.to_sym
-      puts count_2
       first_var = count_list[count_1]
-      puts first_var
       second_var = count_list[count_2]
-      puts second_var
       generate_percentage(count_list[count_1], count_list[count_2], percentage.third)
     end
   end

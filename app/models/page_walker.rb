@@ -3,7 +3,7 @@ class PageWalker
     @biography_pages = biography_pages
     @page_array = page_array
 
-    if start_page_already_traversed?(start_page) == []
+    if start_page_already_traversed?(start_page) == [] || false
       traverse_pages(start_page)
       set_traversal_status(start_page)
     end

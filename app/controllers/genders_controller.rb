@@ -7,7 +7,6 @@ class GendersController < ApplicationController
   def new
     last_bio_gender = Biography.last.rough_gender
     if last_bio_gender == "unknown"
-#      GenderFinder.new.genderize_database
       if GenderFinder.new.try(:genderize_database)
         @complete = "Done generating."
       end
