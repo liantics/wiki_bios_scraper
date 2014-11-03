@@ -1,0 +1,14 @@
+<h2>New Gender Update</h2>
+If new biographies have been added to the database, visiting this page will run the gender filter on them, to assign a rough guess for the gender.
+
+If none have been added since the last time this was run, there's no need to be here, since nothing will happen.
+
+<% if @complete %>
+  <h2>Gender Update Status</h2>
+  <%= @complete %>
+<% end %>
+
+<div>
+<%= button_to "Go to genders", genders_path, method: :get %>
+<%= button_to "Go to home", root_path, method: :get %>
+</div>

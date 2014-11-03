@@ -1,24 +1,7 @@
-<h2>Pages in This Quality Class</h2>
-<div>
-<% @pages_in_this_quality_class.each do |page| %>
-  <p>
-    <%= link_to page, page %>
-  </p>
+<h2><%= @number_of_biography_links_to_show %> Random Female Biography Links</h2>
+<% @female_biography_links.each do |biography_link| %>
+  <div>
+    <p><strong><%= biography_link.name %>: </strong>
+    <%= link_to biography_link.name, biography_path(biography_link.id) %></p>
+  </div>
 <% end %>
-</div>
-
-<h2>Names on Those Pages</h2>
-<div style="float: left;">
-  <% @names.each do |name| %>
-    <p>
-    <%= name %>
-    </p>
-  <% end %>
-</div>
-<div style="float: right">
-  <% @urls.each do |url| %>
-    <p>
-    <%= link_to url, url %>
-    </p>
-  <% end %>
-</div>

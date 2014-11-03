@@ -1,17 +1,16 @@
 class GendersController < ApplicationController
 
   def index
-    @last_bio_gender = Biography.last.rough_gender
-
-    GenderFinder.new.genderize_database
-
-    @refreshed_bio = refresh_last_bio
+    @genders = Biography.all.pluck(:rough_gender).uniq
   end
 
-  private
-
-  def refresh_last_bio
-    Biography.last.rough_gender
-
+  def new
+    last_bio_gender = Biography.last.rough_gender
+    if last_bio_gender == "unknown"
+#      GenderFinder.new.genderize_database
+      if GenderFinder.new.try(:genderize_database)
+        @complete = "Done generating."
+      end
+    end
   end
 end
