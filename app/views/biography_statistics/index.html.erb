@@ -1,0 +1,14 @@
+<h2>Raw Statistics of Genders in Wikipedia Biographies</h2>
+<p>The statistics below are from screen scraping wikipedia biographies, then running them through a gender scanner. We'll be adding gender data from other processes, as well. There is no formatting applied because a designer is working on site design, separately.</p>
+
+<h3>Percentages</h3>
+<% @percentage_statistics.each do |statistic| %>
+  <p><strong><%= statistic.name %></strong>:
+  <%= number_with_precision(statistic.value, precision: 2) %></p>
+<% end %>
+
+<h3>Counts</h3>
+<% @count_statistics.each do |statistic| %>
+  <p><strong><%= statistic.name %></strong>:
+  <%= number_with_precision(statistic.value, precision: 0) %></p>
+<% end %>

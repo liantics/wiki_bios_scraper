@@ -1,3 +1,11 @@
-<h2>Generating Genders ... </h2>
-<%= @last_bio_gender %>
-<%= @refreshed_bio %>
+<h2>The Following Genders Are Currently Being Used</h2>
+<% @genders.each do |gender| %>
+<div>
+  <% if gender == "unknown" %>
+    Some genders have not been determined, update genders to assign rough (unverified) genders.
+    <%= button_to "Update genders", new_gender_path, method: :get %>
+  <% else %>
+    <strong><%= gender %> </strong>
+  <% end %>
+</div>
+<% end %>

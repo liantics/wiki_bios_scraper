@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007210020) do
+ActiveRecord::Schema.define(version: 20141102154729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,23 @@ ActiveRecord::Schema.define(version: 20141007210020) do
     t.string   "verified_gender", default: "not verified", null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "biography_class"
+  end
+
+  create_table "biography_statistics", force: true do |t|
+    t.string   "name",           null: false
+    t.float    "value",          null: false
+    t.string   "statistic_type", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "wiki_biography_classes", force: true do |t|
+    t.text     "class_type"
+    t.text     "class_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "traversal_status"
   end
 
 end

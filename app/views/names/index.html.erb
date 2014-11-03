@@ -1,0 +1,14 @@
+<h2>Verified Names</h2>
+
+<h3>Verified Female Names</h3>
+<% if @verified_woman %>
+  <% @verified_women.each do | woman | %>
+    <p>
+    <%= link_to woman.name, woman %><br />
+    gender: <%= woman.gender %>
+    </p>
+  <% end %>
+
+<% else %>
+  None verified, yet
+<% end %>
