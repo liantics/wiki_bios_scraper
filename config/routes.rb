@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :biographies, only: [:index, :show]
+  resources :biographies, only: [:index, :show, :new]
   resources :biography_statistics, only: [:index, :new]
   resources :names, only: [:index, :show]
   resources :genders, only: [:index, :new]
