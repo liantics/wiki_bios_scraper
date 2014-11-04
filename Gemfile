@@ -8,5 +8,6 @@ gem "coffee-rails", "~> 4.0.0"
 gem "jquery-rails"
 gem "jbuilder", "~> 2.0"
 gem "nokogiri"
+gem "sexmachine", "~> 0.1.0"
+gem "delayed_job_active_record"
 gem "rails_12factor"
-gem 'sexmachine', '~> 0.1.0'
