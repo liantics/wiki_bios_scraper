@@ -27,7 +27,9 @@ class GenderFinder
   def determine_rough_gender(id, name, gender_detector)
     entry = Biography.find(id)
     entry.rough_gender = gender_detector.get_gender(name)
-    entry.rough_gender = add_or_remove_underscores("remove", entry.rough_gender.to_s)
+    entry.rough_gender = add_or_remove_underscores(
+      "remove", entry.rough_gender.to_s
+    )
     if entry.rough_gender == "andy"
       relabel_androgenous_genders(entry)
     end
@@ -35,6 +37,6 @@ class GenderFinder
   end
 
   def relabel_androgenous_genders(entry)
-      entry.rough_gender = "androgynous or unknown"
+    entry.rough_gender = "androgynous or unknown"
   end
 end

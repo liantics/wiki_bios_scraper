@@ -14,7 +14,10 @@ module GenderCounters
     @gender_list.each do |gender|
       statistic_name = craft_any_statistic_name(gender)
 
-      BiographyStatistic.where(name: statistic_name.to_s).first_or_create do |statistic|
+      BiographyStatistic.where(
+        name: statistic_name.to_s
+      ).first_or_create do |statistic|
+
         statistic.value = determine_gender_count(gender)
         statistic.statistic_type = "count"
       end
@@ -29,7 +32,11 @@ module GenderCounters
     biography_class.each do |bio_class|
       @gender_list.each do |gender|
         statistic_name = craft_any_statistic_name(gender).to_s
-        entry_meta_data = [gender, "", bio_class.to_s]
+        entry_meta_data = [
+          gender,
+          "",
+          bio_class.to_s
+        ]
         create_statistic_entry(statistic_name, "count", entry_meta_data)
       end
 
@@ -45,7 +52,11 @@ module GenderCounters
         biography_class
       ).to_s
 
-      entry_meta_data = [joint_gender.first, joint_gender.second, biography_class.to_s]
+      entry_meta_data = [
+        joint_gender.first,
+        joint_gender.second,
+        biography_class.to_s]
+
       create_statistic_entry(statistic_name, "count", entry_meta_data)
     end
   end
@@ -58,8 +69,9 @@ module GenderCounters
       ).length
     else
       Biography.where(
-        biographies[:biography_class].eq(biography_class)
-        .and(biographies[:rough_gender].matches_any([gender_1, gender_2]))
+        biographies[:biography_class].eq(biography_class).and(
+          biographies[:rough_gender].matches_any([gender_1, gender_2])
+        )
       ).length
     end
   end
@@ -68,12 +80,17 @@ module GenderCounters
     counts = Hash.new
     @gender_list.each do |gender|
       statistic_name = craft_any_statistic_name(gender)
-      counts[statistic_name.to_sym] = BiographyStatistic.find_by(name: statistic_name).value
+      counts[statistic_name.to_sym] = BiographyStatistic.find_by(
+        name: statistic_name
+      ).value
     end
 
-    counts["female_mostly_female".to_sym] = counts[:female] + counts[:mostly_female]
+    counts["female_mostly_female".to_sym] = 
+      counts[:female] + counts[:mostly_female]
     counts["male_mostly_male".to_sym] = counts[:male] + counts[:mostly_male]
-    counts["total_records".to_sym] = BiographyStatistic.find_by(name: "total_records").value
+    counts["total_records".to_sym] = BiographyStatistic.find_by(
+      name: "total_records"
+    ).value
     counts
   end
 end
