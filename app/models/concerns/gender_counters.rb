@@ -1,5 +1,6 @@
 module GenderCounters
   extend ActiveSupport::Concern
+  include BiographyStatisticVariables
 
   def get_genders
     Biography.all.pluck(:rough_gender).uniq
