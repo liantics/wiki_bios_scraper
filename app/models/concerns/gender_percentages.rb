@@ -1,6 +1,11 @@
 module GenderPercentages
-  extend ActiveSupport::Concern
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+>>>>>>> e9853d2... Respond to Pull Request Comments
+=======
+>>>>>>> 3efa2cf... Respond to pull request comments
   def generate_this_percentage(count_1, count_2, statistic_name)
     if count_1 < count_2
       percentage = (count_1 / count_2) * 100

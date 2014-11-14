@@ -1,13 +1,12 @@
 module GenderCounters
-  extend ActiveSupport::Concern
   include BiographyStatisticVariables
 
   def get_genders
-    Biography.all.pluck(:rough_gender).uniq
+    Biography.pluck(:rough_gender).uniq
   end
 
   def get_biography_classes
-    Biography.all.pluck(:biography_class).uniq
+    Biography.pluck(:biography_class).uniq
   end
 
   def generate_raw_counts
@@ -85,7 +84,7 @@ module GenderCounters
       ).value
     end
 
-    counts["female_mostly_female".to_sym] = 
+    counts["female_mostly_female".to_sym] =
       counts[:female] + counts[:mostly_female]
     counts["male_mostly_male".to_sym] = counts[:male] + counts[:mostly_male]
     counts["total_records".to_sym] = BiographyStatistic.find_by(

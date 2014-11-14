@@ -1,10 +1,9 @@
-include StringManipulator
-include GenderCounters
-include GenderPercentages
-include StatisticsEntry
-include BiographyStatisticVariables
-
 class BiographyStatistic < ActiveRecord::Base
+  include StringManipulator
+  include GenderCounters
+  include GenderPercentages
+  include StatisticsEntry
+  include BiographyStatisticVariables
 
   validates :name, presence: true
   validates :value, presence: true

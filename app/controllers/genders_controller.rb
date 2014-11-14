@@ -1,7 +1,7 @@
 class GendersController < ApplicationController
 
   def index
-    @genders = Biography.all.pluck(:rough_gender).uniq
+    @genders = Biography.pluck(:rough_gender).uniq
   end
 
   def new
