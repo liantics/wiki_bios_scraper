@@ -1,5 +1,4 @@
 module StatisticsEntry
-
   def create_statistic_entry(statistic_name, entry_type, entry_meta_data)
     BiographyStatistic.where(name: statistic_name).first_or_create do |statistic|
       if entry_type == "percentage"

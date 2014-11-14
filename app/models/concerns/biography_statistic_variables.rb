@@ -1,5 +1,4 @@
 module BiographyStatisticVariables
-
   LINKS_TO_SHOW = 2000
 
   JOINT_GENDERS = [
