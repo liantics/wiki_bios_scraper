@@ -42,7 +42,7 @@ class BiographiesController < ApplicationController
     string_2 = "-Class_biography_articles"
 
     substring = strip_string.call(page, string_1).to_s
-    biography_class = strip_string.call(substring.to_s, string_2).to_s
+    strip_string.call(substring.to_s, string_2).to_s
   end
 
   def generate_names(name_list, start_page)
