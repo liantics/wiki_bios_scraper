@@ -1,37 +1,9 @@
 class BiographiesController < ApplicationController
   include StringManipulator
+  include BiographyStatisticVariables
 
   require 'nokogiri'
   require 'open-uri'
-  #Generating new biography entries is intentionally a painful, manual process, to prevent accidental overload of wikipedia. For each page you want to scrape, add it to the WikiBiographyClass table via the console. You'll need to specify the following:
-  #
-  #class_type is the portion of the URL between the : and the -Class, in quotes.
-  #class_url is the url, in quotes.
-  #traversal_status = false.
-  #
-  #It's best to add one at a time, then wait a few minutes after the scrape is complete before running another one.
-  #You probably don't want wikipedia to block your IP address.
-
-  PAGES_SCRAPED = [
-    "http://en.wikipedia.org/wiki/Category:FA-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:A-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:GA-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:B-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:C-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:Disambig-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:Book-Class_biography_articles"
-  ]
-
-  PAGES_NOT_SCRAPED_YET = [
-    "http://en.wikipedia.org/wiki/Category:stub-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:start-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:Template-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:NA-Class_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:Unassessed_biography_articles",
-    "http://en.wikipedia.org/wiki/Category:List-Class_biography_articles"
-  ]
-
-  LINKS_TO_SHOW = 2000
 
   def index
     @number_of_biography_links_to_show = LINKS_TO_SHOW
