@@ -7,7 +7,6 @@ class GenderFinder
     gender_detector = SexMachine::Detector.new
 
     find_gender_by_first_name(names, gender_detector)
-    relabel_androgenous_genders
   end
 
   def find_gender_by_first_name(names, gender_detector)
