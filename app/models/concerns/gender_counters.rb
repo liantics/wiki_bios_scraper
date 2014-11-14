@@ -85,7 +85,7 @@ module GenderCounters
       ).value
     end
 
-    counts["female_mostly_female".to_sym] = 
+    counts["female_mostly_female".to_sym] =
       counts[:female] + counts[:mostly_female]
     counts["male_mostly_male".to_sym] = counts[:male] + counts[:mostly_male]
     counts["total_records".to_sym] = BiographyStatistic.find_by(
