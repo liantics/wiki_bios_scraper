@@ -1,11 +1,4 @@
 module StringManipulator
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> e9853d2... Respond to Pull Request Comments
-=======
->>>>>>> 3efa2cf... Respond to pull request comments
   def strip_string(original_string, string_to_strip)
     original_string.gsub(string_to_strip, "")
   end

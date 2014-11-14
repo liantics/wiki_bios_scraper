@@ -41,13 +41,9 @@ class BiographiesController < ApplicationController
     strip_from_beginning_of_url = "http://en.wikipedia.org/wiki/Category:"
     strip_from_end_of_url = "-Class_biography_articles"
 
-<<<<<<< HEAD
     beginning_has_been_stripped = strip_string(page, strip_from_beginning_of_url).to_s
     strip_string(beginning_has_been_stripped, strip_from_end_of_url).to_s
-=======
-    substring = strip_string(page, strip_from_beginning_of_url).to_s
-    strip_string(substring, strip_from_end_of_url).to_s
->>>>>>> e9853d2... Respond to Pull Request Comments
+
   end
 
   def generate_names(name_list, start_page)

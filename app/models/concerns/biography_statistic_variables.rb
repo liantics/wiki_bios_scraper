@@ -1,11 +1,4 @@
 module BiographyStatisticVariables
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> e9853d2... Respond to Pull Request Comments
-=======
->>>>>>> 3efa2cf... Respond to pull request comments
   LINKS_TO_SHOW = 2000
 
   JOINT_GENDERS = [
