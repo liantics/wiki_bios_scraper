@@ -1,6 +1,14 @@
 module GenderCounters
   extend ActiveSupport::Concern
 
+  def get_genders
+    Biography.all.pluck(:rough_gender).uniq
+  end
+
+  def get_biography_classes
+    Biography.all.pluck(:biography_class).uniq
+  end
+
   def generate_raw_counts
     @gender_list.each do |gender|
       statistic_name = craft_any_statistic_name(gender)
@@ -30,11 +38,13 @@ module GenderCounters
 
   def generate_joint_gender_counts(biography_class)
     JOINT_GENDERS.each do |joint_gender|
-
-      statistic_name = craft_any_statistic_name(joint_gender.first, joint_gender.second, biography_class).to_s
+      statistic_name = craft_any_statistic_name(
+        joint_gender.first,
+        joint_gender.second,
+        biography_class
+      ).to_s
 
       entry_meta_data = [joint_gender.first, joint_gender.second, biography_class.to_s]
-
       create_statistic_entry(statistic_name, "count", entry_meta_data)
     end
   end

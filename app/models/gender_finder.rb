@@ -1,4 +1,5 @@
 class GenderFinder
+  include StringManipulator
   require "sexmachine"
 
   def genderize_database
@@ -6,7 +7,6 @@ class GenderFinder
     gender_detector = SexMachine::Detector.new
 
     find_gender_by_first_name(names, gender_detector)
-
     relabel_androgenous_genders
   end
 
@@ -28,19 +28,14 @@ class GenderFinder
   def determine_rough_gender(id, name, gender_detector)
     entry = Biography.find(id)
     entry.rough_gender = gender_detector.get_gender(name)
-    entry.rough_gender = remove_underscores(entry.rough_gender)
+    entry.rough_gender = add_or_remove_underscores("remove", entry.rough_gender.to_s)
+    if entry.rough_gender == "andy"
+      relabel_androgenous_genders(entry)
+    end
     entry.save
   end
 
-  def remove_underscores(gender)
-    gender.gsub(/_/," ")
-  end
-
-  def relabel_androgenous_genders
-    genders = Biography.where(rough_gender: "andy")
-    genders.each do |gender|
-      gender.rough_gender = "androgynous or unknown"
-      gender.save
-    end
+  def relabel_androgenous_genders(entry)
+      entry.rough_gender = "androgynous or unknown"
   end
 end
