@@ -3,7 +3,7 @@
 <div>
   <% if gender == "unknown" %>
     Some genders have not been determined, update genders to assign rough (unverified) genders.
-    <%= button_to "Update genders", new_gender_path, method: :get %>
+    <%= link_to "Update genders", new_gender_path %>
   <% else %>
     <strong><%= gender %> </strong>
   <% end %>
