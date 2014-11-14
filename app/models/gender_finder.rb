@@ -28,7 +28,12 @@ class GenderFinder
   def determine_rough_gender(id, name, gender_detector)
     entry = Biography.find(id)
     entry.rough_gender = gender_detector.get_gender(name)
+    entry.rough_gender = remove_underscores(entry.rough_gender)
     entry.save
+  end
+
+  def remove_underscores(gender)
+    gender.gsub(/_/," ")
   end
 
   def relabel_androgenous_genders

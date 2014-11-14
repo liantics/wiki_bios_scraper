@@ -6,7 +6,8 @@ class BiographyStatisticsController < ApplicationController
 
   def new
     @started = "starting"
-    BiographyStatistic.new.generate_statistics
-    @done = "done"
+    if BiographyStatistic.new.try(:generate_statistics)
+      @done = "done"
+    end
   end
 end
