@@ -1,5 +1,4 @@
 module GenderPercentages
-  extend ActiveSupport::Concern
 
   def generate_this_percentage(count_1, count_2, statistic_name)
     if count_1 < count_2

@@ -1,5 +1,4 @@
 module BiographyStatisticVariables
-  extend ActiveSupport::Concern
 
   LINKS_TO_SHOW = 2000
 

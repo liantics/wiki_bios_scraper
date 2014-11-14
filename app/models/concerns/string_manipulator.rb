@@ -1,5 +1,4 @@
 module StringManipulator
-  extend ActiveSupport::Concern
 
   def strip_string(original_string, string_to_strip)
     original_string.gsub(string_to_strip, "")

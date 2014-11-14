@@ -1,13 +1,12 @@
 module GenderCounters
-  extend ActiveSupport::Concern
   include BiographyStatisticVariables
 
   def get_genders
-    Biography.all.pluck(:rough_gender).uniq
+    Biography.pluck(:rough_gender).uniq
   end
 
   def get_biography_classes
-    Biography.all.pluck(:biography_class).uniq
+    Biography.pluck(:biography_class).uniq
   end
 
   def generate_raw_counts

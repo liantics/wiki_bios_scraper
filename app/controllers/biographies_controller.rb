@@ -12,7 +12,7 @@ class BiographiesController < ApplicationController
   end
 
   def new
-    start_pages = WikiBiographyClass.all.pluck(:class_url)
+    start_pages = WikiBiographyClass.pluck(:class_url)
     start_pages.each do |start_page|
       @pages_in_this_quality_class = [start_page]
       @biography_pages = []
@@ -38,11 +38,11 @@ class BiographiesController < ApplicationController
   private
 
   def determine_class(page)
-    string_1 = "http://en.wikipedia.org/wiki/Category:"
-    string_2 = "-Class_biography_articles"
+    strip_from_beginning_of_url = "http://en.wikipedia.org/wiki/Category:"
+    strip_from_end_of_url = "-Class_biography_articles"
 
-    substring = strip_string.call(page, string_1).to_s
-    strip_string.call(substring.to_s, string_2).to_s
+    substring = strip_string(page, strip_from_beginning_of_url).to_s
+    strip_string(substring, strip_from_end_of_url).to_s
   end
 
   def generate_names(name_list, start_page)
