@@ -8,7 +8,8 @@ class BiographiesController < ApplicationController
   def index
     @number_of_biography_links_to_show = LINKS_TO_SHOW
     female_biographies = Biography.where(rough_gender: "female")
-    @female_biography_links = female_biographies.order("RANDOM()").limit(LINKS_TO_SHOW)
+    @female_biography_links =
+      female_biographies.order("RANDOM()").limit(LINKS_TO_SHOW)
   end
 
   def new
@@ -34,7 +35,8 @@ class BiographiesController < ApplicationController
   def show
       @person = Biography.find(params[:id])
       biography_name = @person.name
-      @biography_text = IndividualBiographyContentCollector.new.gather_page_text(biography_name)
+      @biography_text =
+        IndividualBiographyContentCollector.new.gather_page_text(biography_name)
   end
 
   private
@@ -58,7 +60,7 @@ class BiographiesController < ApplicationController
   def generate_urls(name_list)
     puts "generating_urls"
     puts name_list
-    name_list.map { |name| "https://en.wikipedia.org/wiki/#{name}"}
+    name_list.map { |name| "https://en.wikipedia.org/wiki/#{name}" }
   end
 
   def fill_database(biography_class)
