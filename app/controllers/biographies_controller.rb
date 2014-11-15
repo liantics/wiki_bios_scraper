@@ -33,6 +33,8 @@ class BiographiesController < ApplicationController
 
   def show
       @person = Biography.find(params[:id])
+      biography_name = @person.name
+      @biography_text = IndividualBiographyContentCollector.new.gather_page_text(biography_name)
   end
 
   private
@@ -43,7 +45,6 @@ class BiographiesController < ApplicationController
 
     beginning_has_been_stripped = strip_string(page, strip_from_beginning_of_url).to_s
     strip_string(beginning_has_been_stripped, strip_from_end_of_url).to_s
-
   end
 
   def generate_names(name_list, start_page)
@@ -57,7 +58,7 @@ class BiographiesController < ApplicationController
   def generate_urls(name_list)
     puts "generating_urls"
     puts name_list
-    name_list.map { |name| "http://en.wikipedia.org/wiki/#{name}"}
+    name_list.map { |name| "https://en.wikipedia.org/wiki/#{name}"}
   end
 
   def fill_database(biography_class)
