@@ -18,7 +18,7 @@ class IndividualBiographyContentCollector
       "[[", " ").gsub(
       "]]", " ").gsub(
       "{{", " ").gsub(
-      "}}", "<br>" ).gsub(
+      "}}", "<br>").gsub(
       "==", "<br> <br>").gsub(
       "|thumb|", "<br> <br>"
     )
