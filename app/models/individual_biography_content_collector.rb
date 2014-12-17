@@ -9,7 +9,7 @@ class IndividualBiographyContentCollector
 
   def generate_page_text_url(biography_name)
     URI.escape(
-      "https://en.wikipedia.org/w/index.php?title=#{biography_name}&action=edit"
+      "http://en.wikipedia.org/w/index.php?title=#{biography_name}&action=edit"
     )
   end
 
